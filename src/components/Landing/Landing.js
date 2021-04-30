@@ -109,8 +109,8 @@ function Landing() {
                 <div className="characterContainer" id="cam">
                     <img
                         className="characterImage"
-                        onClick={() => playBday()}
-                        onClick={() => stopBday()}
+                        onMouseEnter={() => playBday()}
+                        onMouseLeave={() => stopBday()}
                         src={cam}
                         alt=""
                     />
