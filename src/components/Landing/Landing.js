@@ -26,6 +26,7 @@ import CameraModal from '../CameraModal/CameraModal';
 import Loading from '../Loading/Loading';
 import cameraSfx from '../../assets/sounds/camera-shutter-click-03.mp3';
 import fireSfx from '../../assets/sounds/fireworks.mp3';
+import bdaySfx from '../../assets/sounds/hbd.mp3';
 
 function Landing() {
     const [modalState, setModalState] = useState(0);
@@ -35,9 +36,18 @@ function Landing() {
 
     const [click] = useSound(cameraSfx);
     const [fire] = useSound(fireSfx);
+    const [bday, { stop }] = useSound(bdaySfx);
 
     const playClick = () => {
         click();
+    };
+
+    const playBday = () => {
+        bday();
+    };
+
+    const stopBday = () => {
+        stop();
     };
 
     const playFire = () => {
@@ -97,7 +107,13 @@ function Landing() {
                     <img className="balloonImage" src={balloons} alt="" />
                 </div>
                 <div className="characterContainer" id="cam">
-                    <img className="characterImage" src={cam} alt="" />
+                    <img
+                        className="characterImage"
+                        onClick={() => playBday()}
+                        onClick={() => stopBday()}
+                        src={cam}
+                        alt=""
+                    />
                 </div>
                 <div className={pyro ? 'pyro visible' : 'pyro hidden'}>
                     <div className="before"></div>
