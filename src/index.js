@@ -2,12 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Landing from './components/Landing/Landing';
+import App from './components/App/App';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-    <React.StrictMode>
-        <Landing />
-    </React.StrictMode>,
+    <Router>
+        <Switch>
+            <Route path="/home" exact component={Landing} />
+            <Route exact path="/" component={App} />
+        </Switch>
+    </Router>,
     document.getElementById('root')
 );
 

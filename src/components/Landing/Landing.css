@@ -5,6 +5,10 @@ body {
     overflow: hidden;
 }
 .picnicContainer {
+    margin: 0;
+    padding: 0;
+    background: #638247;
+    overflow: hidden;
     height: 100vh;
     background-position: center;
     background-size: contain;

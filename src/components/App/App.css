@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+.adventureBackground {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    height: 100vh;
+    background-image: url('../../assets/adventureBack.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.weirdDiv {
+    width: 100%;
+}
+
+.eggFace {
+    display: block;
+    align-self: center;
+    margin: 0 auto;
+}
+
+.adventureButton {
+    width: 60%;
+    display: block;
+    margin: 2rem auto;
+    background-color: #dfe4ed;
+    padding: 1rem;
+    color: black;
+    border-radius: 10px;
+    font-family: 'Pangolin', sans-serif;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    align-self: center;
+    border: 4px black solid;
+}
+
+a {
+    text-decoration: none;
+}
