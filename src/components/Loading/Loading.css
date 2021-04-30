@@ -1,0 +1,22 @@
+.visibleLoader {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hiddenLoader {
+    display: none;
+}
+
+.loadingText {
+    animation: blinker 1.4s linear infinite;
+    color: white;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}

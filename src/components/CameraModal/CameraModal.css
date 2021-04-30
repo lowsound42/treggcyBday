@@ -1,0 +1,30 @@
+.hide {
+    display: none;
+}
+
+.modalContainer {
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    position: absolute;
+    top: 2%;
+    left: 40%;
+}
+
+.closeButton {
+    align-self: flex-end;
+    font-size: 2rem;
+}
+
+.closeButton:hover {
+    cursor: pointer;
+}
+
+.pictureContainer {
+    width: 100%;
+}
+
+.randomPic {
+    width: 100%;
+    border-radius: 20px;
+}
