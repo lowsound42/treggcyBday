@@ -183,7 +183,6 @@ function Landing() {
                     <img className="characterImage" src={baher} alt="" />
                 </div>
                 <div className="characterContainer" id="yinkegg">
-                    ={' '}
                     <img
                         className="characterImage"
                         onClick={() => getLink()}
