@@ -27,16 +27,20 @@ import Loading from '../Loading/Loading';
 import cameraSfx from '../../assets/sounds/camera-shutter-click-03.mp3';
 import fireSfx from '../../assets/sounds/fireworks.mp3';
 import bdaySfx from '../../assets/sounds/hbd.mp3';
+import horsePic from '../../assets/horse.png';
+import horseSfx from '../../assets/sounds/horse.wav';
 
 function Landing() {
     const [modalState, setModalState] = useState(0);
     const outsideRef = useRef(null);
     const [loading, setLoading] = useState(0);
     const [pyro, setPyro] = useState(0);
+    const [awakenHorse, setAwakenHorse] = useState(0);
 
     const [click] = useSound(cameraSfx);
     const [fire] = useSound(fireSfx);
     const [bday, { stop }] = useSound(bdaySfx);
+    const [horse] = useSound(horseSfx, { volume: 0.05 });
 
     const playClick = () => {
         click();
@@ -48,6 +52,10 @@ function Landing() {
 
     const stopBday = () => {
         stop();
+    };
+
+    const playHorse = () => {
+        horse();
     };
 
     const playFire = () => {
@@ -78,6 +86,25 @@ function Landing() {
         }
     }
 
+    function horseFunction() {
+        setAwakenHorse(1);
+        playHorse();
+        var test = document.getElementById('horseImage');
+        setTimeout(() => {
+            test.style.transform = 'scale(2)';
+        }, 500);
+        setTimeout(() => {
+            test.style.transform = 'scale(3)';
+        }, 1000);
+        setTimeout(() => {
+            test.style.transform = 'scale(4)';
+        }, 1500);
+        setTimeout(() => {
+            setAwakenHorse(0);
+        }, 4000);
+        test.style.transform = 'scale(1)';
+    }
+
     useEffect(() => {
         if (modalState) {
             outsideRef.current.addEventListener('mousedown', toggleModal);
@@ -89,6 +116,9 @@ function Landing() {
     return (
         <>
             <Loading loading={loading}>Loading...</Loading>
+            <div className="phoneMessage">
+                Sorry, this is not a responsive experience. Use your laptop!
+            </div>
             <div
                 className={loading ? 'picnicContainer' : 'hidden'}
                 ref={outsideRef}
@@ -160,7 +190,23 @@ function Landing() {
                     />
                 </div>
                 <div className="characterContainer" id="em">
-                    <img className="characterImage" src={em} alt="" />
+                    <img
+                        className="characterImage"
+                        onClick={() => horseFunction()}
+                        src={em}
+                        alt=""
+                    />
+                </div>
+                <div
+                    className={awakenHorse ? 'characterContainer' : 'hidden'}
+                    id="horsey"
+                >
+                    <img
+                        className="horsey"
+                        id="horseImage"
+                        src={horsePic}
+                        alt=""
+                    />
                 </div>
                 <div className="characterContainer" id="leggo">
                     <img className="characterImage" src={leggo} alt="" />
