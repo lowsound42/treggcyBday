@@ -29,6 +29,8 @@ import fireSfx from '../../assets/sounds/fireworks.mp3';
 import bdaySfx from '../../assets/sounds/hbd.mp3';
 import horsePic from '../../assets/horse.png';
 import horseSfx from '../../assets/sounds/horse.wav';
+import eaSfx from '../../assets/sounds/ea.mp3';
+import { yinkaRec } from '../../data/youtube';
 
 function Landing() {
     const [modalState, setModalState] = useState(0);
@@ -37,13 +39,26 @@ function Landing() {
     const [pyro, setPyro] = useState(0);
     const [awakenHorse, setAwakenHorse] = useState(0);
 
+    var recoUrl;
+
+    function getLink() {
+        recoUrl = yinkaRec[Math.floor(Math.random() * yinkaRec.length)];
+        window.open(recoUrl.reco);
+        recoUrl = yinkaRec[Math.floor(Math.random() * yinkaRec.length)];
+    }
+
     const [click] = useSound(cameraSfx);
     const [fire] = useSound(fireSfx);
     const [bday, { stop }] = useSound(bdaySfx);
     const [horse] = useSound(horseSfx, { volume: 0.05 });
+    const [ea] = useSound(eaSfx);
 
     const playClick = () => {
         click();
+    };
+
+    const playEa = () => {
+        ea();
     };
 
     const playBday = () => {
@@ -160,11 +175,21 @@ function Landing() {
                         alt=""
                     />
                 </div>
-                <div className="characterContainer" id="baher">
+                <div
+                    className="characterContainer"
+                    onClick={() => playEa()}
+                    id="baher"
+                >
                     <img className="characterImage" src={baher} alt="" />
                 </div>
                 <div className="characterContainer" id="yinkegg">
-                    <img className="characterImage" src={yinkegg} alt="" />
+                    ={' '}
+                    <img
+                        className="characterImage"
+                        onClick={() => getLink()}
+                        src={yinkegg}
+                        alt=""
+                    />
                 </div>
                 <div className="characterContainer" id="chelsegg">
                     <img className="characterImage" src={chelsegg} alt="" />

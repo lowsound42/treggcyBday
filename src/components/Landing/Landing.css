@@ -16,6 +16,7 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
+    z-index: 0;
 }
 
 .background {
@@ -23,6 +24,7 @@ body {
     margin: 0 auto;
     height: 100vh;
     width: 80vw;
+    z-index: -2;
 }
 
 .characterContainer {
@@ -57,14 +59,15 @@ body {
 }
 
 #baher {
-    top: 37%;
+    top: 39%;
     left: 19%;
+    z-index: 2;
 }
 
 #yinkegg {
-    top: 31%;
+    top: 30%;
     left: 19%;
-    z-index: 0;
+    z-index: 1;
 }
 
 #yinkegg img {
@@ -72,13 +75,14 @@ body {
 }
 
 #chelsegg {
-    top: 28%;
-    left: 26%;
+    top: 26%;
+    left: 27%;
+    z-index: 2;
 }
 
 #syd {
     top: 25%;
-    left: 32%;
+    left: 33%;
 }
 
 #lauregg {
