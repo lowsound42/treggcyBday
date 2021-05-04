@@ -38,6 +38,10 @@
     border: 4px black solid;
 }
 
+.adventureButton:hover {
+    cursor: pointer;
+}
+
 a {
     text-decoration: none;
 }

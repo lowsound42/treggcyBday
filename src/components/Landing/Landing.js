@@ -13,10 +13,8 @@ import leggo from '../../assets/LISA.png';
 import luna from '../../assets/LUNA.png';
 import eggmar from '../../assets/OMAR.png';
 import pengy from '../../assets/PENGY.png';
-import refresh from '../../assets/REFRESH-BUTTON.png';
 import sonegg from '../../assets/SONYA.png';
 import syd from '../../assets/SYD.png';
-import textbox from '../../assets/TEXTBOX.png';
 import treggcy from '../../assets/TRACY.png';
 import bush from '../../assets/Treggs-10-1.png';
 import yinkegg from '../../assets/YINKA.png';
@@ -27,50 +25,75 @@ import Loading from '../Loading/Loading';
 import cameraSfx from '../../assets/sounds/camera-shutter-click-03.mp3';
 import fireSfx from '../../assets/sounds/fireworks.mp3';
 import bdaySfx from '../../assets/sounds/hbd.mp3';
-import horsePic from '../../assets/horse.png';
-import horseSfx from '../../assets/sounds/horse.wav';
+import horseSfx from '../../assets/sounds/horse-new.wav';
 import eaSfx from '../../assets/sounds/ea.mp3';
 import { yinkaRec } from '../../data/youtube';
+import { recruitingHell } from '../../data/linkedin';
+import horseyProper from '../../assets/float/Treggs-1.png';
+import guitar from '../../assets/float/Treggs-2.png';
+import wine from '../../assets/float/Treggs-3.png';
+import drawing from '../../assets/float/lisaDrawing.png';
+import controller from '../../assets/float/Treggs-8.png';
+import rollSfx from '../../assets/sounds/roll.mp3';
+import dice from '../../assets/float/Treggs-5.png';
+import birdFace from '../../assets/float/Treggs-6.png';
+import threeD from '../../assets/float/Treggs-9.png';
+import laughFace from '../../assets/float/Treggs-11.png';
+import topPeng from '../../assets/float/Treggs-10.png';
+import trumpet from '../../assets/float/Treggs-7.png';
+import omgSfx from '../../assets/sounds/omg.wav';
+import meowSfx from '../../assets/sounds/cat.wav';
+import evilLaughSfx from '../../assets/sounds/evilLaugh.wav';
+import trumpetSfx from '../../assets/sounds/trumpet.wav';
+import ukeSfx from '../../assets/sounds/uke.wav';
+import ramsaySfx from '../../assets/sounds/disaster.mp3';
+import bumSfx from '../../assets/sounds/bum.wav';
+import flipSfx from '../../assets/sounds/doaflip.mp3';
 
 function Landing() {
     const [modalState, setModalState] = useState(0);
     const outsideRef = useRef(null);
     const [loading, setLoading] = useState(0);
     const [pyro, setPyro] = useState(0);
-    const [awakenHorse, setAwakenHorse] = useState(0);
 
-    var recoUrl;
+    var recoUrl, hell;
 
     function getLink() {
         recoUrl = yinkaRec[Math.floor(Math.random() * yinkaRec.length)];
         window.open(recoUrl.reco);
-        recoUrl = yinkaRec[Math.floor(Math.random() * yinkaRec.length)];
+    }
+
+    function getRecruitmentHell() {
+        hell =
+            recruitingHell[Math.floor(Math.random() * recruitingHell.length)];
+        window.open(hell.hell);
     }
 
     const [click] = useSound(cameraSfx);
     const [fire] = useSound(fireSfx);
     const [bday, { stop }] = useSound(bdaySfx);
-    const [horse] = useSound(horseSfx, { volume: 0.05 });
+    const [horse] = useSound(horseSfx);
     const [ea] = useSound(eaSfx);
+    const [roll] = useSound(rollSfx);
+    const [omg] = useSound(omgSfx);
+    const [evil] = useSound(evilLaughSfx);
+    const [trumpetSound] = useSound(trumpetSfx);
+    const [meow] = useSound(meowSfx);
+    const [bum] = useSound(bumSfx);
+    const [ramsay] = useSound(ramsaySfx);
+    const [uke] = useSound(ukeSfx);
+    const [doflip] = useSound(flipSfx);
+    const [uniqueImage, setUniqueImage] = useState(null);
+    const [midPic, setMidPic] = useState(0);
+    const [specPic, setSpecPic] = useState(0);
+    const [flip, setFlip] = useState(0);
 
     const playClick = () => {
         click();
     };
 
-    const playEa = () => {
-        ea();
-    };
-
-    const playBday = () => {
-        bday();
-    };
-
     const stopBday = () => {
         stop();
-    };
-
-    const playHorse = () => {
-        horse();
     };
 
     const playFire = () => {
@@ -101,23 +124,85 @@ function Landing() {
         }
     }
 
-    function horseFunction() {
-        setAwakenHorse(1);
-        playHorse();
-        var test = document.getElementById('horseImage');
+    function playSound(sound) {
+        switch (sound) {
+            case 'horse':
+                horse();
+                break;
+            case 'bday':
+                bday();
+                break;
+            case 'ea':
+                ea();
+                break;
+            case 'roll':
+                roll();
+                break;
+            case 'trumpet':
+                trumpetSound();
+                break;
+            case 'laugh':
+                evil();
+                break;
+            case 'omg':
+                omg();
+                break;
+            case 'cat':
+                meow();
+                break;
+            case 'ramsay':
+                ramsay();
+                break;
+            case 'bum':
+                bum();
+                break;
+            case 'uke':
+                uke();
+                break;
+            default:
+                break;
+        }
+    }
+
+    function toggleMid(image, sound, time) {
+        stopBday();
+        setUniqueImage(image);
+        setMidPic(0);
+        if (midPic) {
+            setMidPic(0);
+        } else {
+            setMidPic(1);
+        }
+        playSound(sound);
         setTimeout(() => {
-            test.style.transform = 'scale(2)';
-        }, 500);
+            setMidPic(0);
+        }, time);
+    }
+
+    function toggleSpec() {
+        stopBday();
+        uke();
+        if (specPic) {
+            setSpecPic(0);
+        } else {
+            setSpecPic(1);
+        }
         setTimeout(() => {
-            test.style.transform = 'scale(3)';
-        }, 1000);
+            setSpecPic(0);
+        }, 7000);
+    }
+
+    function toggleFlip() {
+        stopBday();
+        doflip();
+        if (flip) {
+            setFlip(0);
+        } else {
+            setFlip(1);
+        }
         setTimeout(() => {
-            test.style.transform = 'scale(4)';
-        }, 1500);
-        setTimeout(() => {
-            setAwakenHorse(0);
+            setFlip(0);
         }, 4000);
-        test.style.transform = 'scale(1)';
     }
 
     useEffect(() => {
@@ -148,100 +233,146 @@ function Landing() {
                     src={background}
                     alt=""
                 />
+                <div
+                    className={
+                        midPic ? 'containerNew visible protector' : 'hidden'
+                    }
+                >
+                    {' '}
+                </div>
+
                 <div className="balloonContainer" id="balloons">
                     <img className="balloonImage" src={balloons} alt="" />
                 </div>
+
                 <div className="characterContainer" id="cam">
-                    <img
-                        className="characterImage"
-                        onMouseEnter={() => playBday()}
-                        onMouseLeave={() => stopBday()}
-                        src={cam}
-                        alt=""
-                    />
+                    <div
+                        className="clickableArea"
+                        onClick={() => toggleMid(guitar, 'bday', 4000)}
+                    ></div>
+                    <img className="characterImage" src={cam} alt="" />
                 </div>
                 <div className={pyro ? 'pyro visible' : 'pyro hidden'}>
                     <div className="before"></div>
                     <div className="after"></div>
                 </div>
                 <div className="characterContainer" id="luna">
-                    <img
-                        className="characterImage"
+                    <div
+                        className="clickableArea"
                         onClick={() => {
                             togglePyro();
                             playFire();
                         }}
-                        src={luna}
-                        alt=""
-                    />
+                    ></div>
+                    <img className="characterImage" src={luna} alt="" />
                 </div>
-                <div
-                    className="characterContainer"
-                    onClick={() => playEa()}
-                    id="baher"
-                >
-                    <img className="characterImage" src={baher} alt="" />
+
+                <div className="characterContainer" id="baher">
+                    <div
+                        className="clickableArea"
+                        onClick={() => {
+                            stopBday();
+                            toggleMid(controller, 'ea', 2000);
+                        }}
+                    ></div>
+                    <img className="characterImage " src={baher} alt="" />
                 </div>
                 <div className="characterContainer" id="yinkegg">
-                    <img
-                        className="characterImage"
+                    <div
+                        className="clickableArea"
                         onClick={() => getLink()}
-                        src={yinkegg}
-                        alt=""
-                    />
+                    ></div>
+                    <img className="characterImage" src={yinkegg} alt="" />
                 </div>
                 <div className="characterContainer" id="chelsegg">
+                    <div
+                        className="clickableArea"
+                        onClick={() => toggleMid(birdFace, 'bum', 2000)}
+                    ></div>
                     <img className="characterImage" src={chelsegg} alt="" />
                 </div>
                 <div className="characterContainer" id="syd">
-                    <img className="characterImage" src={syd} alt="" />
+                    <div
+                        className="clickableArea"
+                        onClick={() => toggleMid(trumpet, 'trumpet', 2000)}
+                    ></div>
+                    <img className="characterImage " src={syd} alt="" />
                 </div>
                 <div className="characterContainer" id="lauregg">
+                    <div
+                        className="clickableArea"
+                        onClick={() => toggleFlip()}
+                    ></div>
                     <img className="characterImage" src={lauregg} alt="" />
                 </div>
                 <div className="characterContainer" id="barb">
+                    <div
+                        className="clickableArea"
+                        onClick={() => toggleMid(dice, 'roll', 2000)}
+                    ></div>
                     <img className="characterImage" src={barb} alt="" />
                 </div>
                 <div className="characterContainer" id="treggcy">
-                    <img
-                        className="characterImage"
+                    <div
+                        className="clickableArea"
                         onClick={() => {
                             toggleModal();
                             playClick();
                         }}
-                        src={treggcy}
-                        alt=""
-                    />
+                    ></div>
+                    <img className="characterImage" src={treggcy} alt="" />
                 </div>
                 <div className="characterContainer" id="em">
-                    <img
-                        className="characterImage"
-                        onClick={() => horseFunction()}
-                        src={em}
-                        alt=""
-                    />
-                </div>
-                <div
-                    className={awakenHorse ? 'characterContainer' : 'hidden'}
-                    id="horsey"
-                >
-                    <img
-                        className="horsey"
-                        id="horseImage"
-                        src={horsePic}
-                        alt=""
-                    />
+                    <div
+                        className="clickableArea"
+                        onClick={() => toggleMid(horseyProper, 'horse', 2000)}
+                    ></div>
+                    <img className="characterImage" src={em} alt="" />
                 </div>
                 <div className="characterContainer" id="leggo">
+                    <div
+                        className="clickableArea"
+                        onClick={() => toggleSpec()}
+                    ></div>
                     <img className="characterImage" src={leggo} alt="" />
                 </div>
+                <div
+                    className={midPic ? 'midContainer visible' : 'hidden'}
+                    id="midImage"
+                >
+                    <img src={midPic ? uniqueImage : null} alt="" />
+                </div>
+                <div
+                    className={specPic ? 'specContainer visible' : 'hidden'}
+                    id="specImage"
+                >
+                    <img src={drawing} alt="" />
+                </div>
+                <div
+                    className={flip ? 'flipContainer visible' : 'hidden'}
+                    id="flipImage"
+                >
+                    <img src={lauregg} alt="" />
+                </div>
                 <div className="characterContainer" id="eggmar">
+                    <div
+                        className="clickableArea"
+                        onClick={() => getRecruitmentHell()}
+                    ></div>
                     <img className="characterImage" src={eggmar} alt="" />
                 </div>
                 <div className="characterContainer" id="zed">
+                    <div
+                        className="clickableArea"
+                        onClick={() => toggleMid(threeD, 'omg', 2000)}
+                    ></div>
                     <img className="characterImage" src={zed} alt="" />
                 </div>
                 <div className="characterContainer" id="sonegg">
+                    <div
+                        className="clickableArea"
+                        onClick={() => toggleMid(wine, 'cat', 2000)}
+                    ></div>
                     <img className="characterImage" src={sonegg} alt="" />
                 </div>
                 <div className="characterContainer" id="camilla">
@@ -251,6 +382,10 @@ function Landing() {
                     <img className="characterImage" src={pengy} alt="" />
                 </div>
                 <div className="bushContainer" id="bush">
+                    <div
+                        className="clickableAreaBush"
+                        onClick={() => toggleMid(topPeng, 'ramsay', 2000)}
+                    ></div>
                     <img className="bushImage" src={bush} alt="" />
                 </div>
             </div>
