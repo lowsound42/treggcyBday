@@ -87,6 +87,7 @@ function Landing() {
     const [midPic, setMidPic] = useState(0);
     const [specPic, setSpecPic] = useState(0);
     const [flip, setFlip] = useState(0);
+    const [backMask, setBackMask] = useState(0);
 
     const playClick = () => {
         click();
@@ -165,6 +166,7 @@ function Landing() {
     }
 
     function toggleMid(image, sound, time) {
+        setBackMask(1);
         stopBday();
         setUniqueImage(image);
         setMidPic(0);
@@ -176,10 +178,12 @@ function Landing() {
         playSound(sound);
         setTimeout(() => {
             setMidPic(0);
+            setBackMask(0);
         }, time);
     }
 
     function toggleSpec() {
+        setBackMask(1);
         stopBday();
         uke();
         if (specPic) {
@@ -189,10 +193,12 @@ function Landing() {
         }
         setTimeout(() => {
             setSpecPic(0);
+            setBackMask(0);
         }, 7000);
     }
 
     function toggleFlip() {
+        setBackMask(1);
         stopBday();
         doflip();
         if (flip) {
@@ -201,8 +207,9 @@ function Landing() {
             setFlip(1);
         }
         setTimeout(() => {
+            setBackMask(0);
             setFlip(0);
-        }, 4000);
+        }, 2000);
     }
 
     useEffect(() => {
@@ -235,11 +242,9 @@ function Landing() {
                 />
                 <div
                     className={
-                        midPic ? 'containerNew visible protector' : 'hidden'
+                        backMask ? 'containerNew visible protector' : 'hidden'
                     }
-                >
-                    {' '}
-                </div>
+                ></div>
 
                 <div className="balloonContainer" id="balloons">
                     <img className="balloonImage" src={balloons} alt="" />
