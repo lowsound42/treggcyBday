@@ -101,11 +101,11 @@ body {
     }
 
     50% {
-        transform: scale(4);
+        transform: scale(5);
     }
 
     100% {
-        transform: scale(6.5) rotate(5deg);
+        transform: scale(8) rotate(10deg);
     }
 }
 
